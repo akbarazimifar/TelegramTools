@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "access.secret.key",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "task.limit",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "file.repository",
+      "type": "java.lang.String"
+    }
+  ]
+}

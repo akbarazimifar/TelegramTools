@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task management</title>
+</head>
+<body>
+
+
+<div class="container-fluid mt-3">
+
+    <br>
+    <ul class="list-inline links-list pull-right">
+        <li class="dropdown language-selector">
+            Language / Язык &nbsp;
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" aria-expanded="false" >
+                <img th:src="@{${language}}" width="16" height="16"> </a>
+            <ul class="dropdown-menu pull-right">
+
+                <li><a href="?lang=en"> <img src="en.png" width="16"
+                                             height="16"> <span th:text="#{lang.eng}"></span> </a></li>
+                <li><a href="?lang=ru"> <img src="ru.png" width="16"
+                                             height="16"> <span th:text="#{lang.ru}"></span> </a></li>
+            </ul>
+        </li>
+        <li class="sep"></li>
+        <li><a href="/logout" data-toggle="chat" data-collapse-sidebar="1" th:text="#{logout}"> <i
+                class="entypo-chat"></i>
+            <i class="entypo-logout right"></i> </a></li>
+    </ul>
+    <h2 th:text="#{task.new}"></h2>
+    <br>
+
+    <form action="/application" method="post">
+        <!-- Vertical -->
+        <div class="form-group">
+            <label for="channelName" th:text="#{channel.address}"></label>
+            <input id="channelName" name="channelName" class="form-control" placeholder="Channel address">
+            <br>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1" th:text="#{document.format}"></label>
+                <select class="form-control" id="exampleFormControlSelect1" name="documentType">
+                    <option>PDF</option>
+                    <option>Word</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="autoSizingCheck" name="images">
+                    <label class="form-check-label" for="autoSizingCheck" th:text="#{download.images}">
+                    </label>
+                    <input type="hidden" value="on" name="_images"/>
+                </div>
+            </div>
+
+
+            <div class="col-auto">
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="autoSizingCheck1" name="loadOnlyNew">
+                    <label class="form-check-label" for="autoSizingCheck1" th:text="#{load.only.new}">
+                    </label>
+                    <input type="hidden" value="on" name="_loadOnlyNew"/>
+                </div>
+                <br>
+            </div>
+
+            <button type="submit" class="btn btn-primary" th:text="#{add.task}"></button>
+        </div>
+    </form>
+
+
+    <div th:if="${error != null}">
+        <div class="alert alert-danger" role="alert">
+            <div th:text="${error}"></div>
+        </div>
+    </div>
+
+    <br>
+    <h2 th:text="#{active.tasks}"></h2>
+
+
+    <div th:if="${#lists.isEmpty(tasks)}"><h5 th:text="#{no.active.tasks}"></h5></div>
+    <div th:unless="${#lists.isEmpty(tasks)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th th:text="#{date.basic}"></th>
+                <th th:text="#{channel.name}"></th>
+                <th th:text="#{document.type}"></th>
+                <th th:text="#{task.state}"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <th:block th:each="task : ${tasks}">
+                <tr>
+                    <td th:text="${task.date}"></td>
+                    <td th:text="${task.channelName}"></td>
+                    <td th:text="${task.documentType}"></td>
+                    <td th:text="${task.state}"></td>
+                </tr>
+            </th:block>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <button class="btn btn-primary" th:text="#{refresh}" onClick="window.location.reload()"></button>
+
+    <br>
+
+
+    <h2 th:text="#{history}"></h2>
+
+    <div th:if="${#lists.isEmpty(history)}">
+        <h5 th:text="#{task.history.is_empty}"></h5>
+    </div>
+    <div th:unless="${#lists.isEmpty(history)}">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th th:text="#{date.basic}"></th>
+                <th th:text="#{channel.name}"></th>
+                <th th:text="#{images}"></th>
+                <th th:text="#{document.type}"></th>
+                <th th:text="#{result}"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <th:block th:each="task : ${history}">
+                <tr>
+
+                    <td th:text="${task.date}"></td>
+                    <td th:text="${task.channel}"></td>
+                    <td th:text="${task.images ? 'Yes' : 'No'}"></td>
+                    <td th:text="${task.documentType}"></td>
+
+                    <td th:if="${task.completed}">
+                        <form method="get" th:action="@{/download/} + ${task.fileId}">
+                            <button class="btn btn-primary" type="submit" th:text="#{download}"></button>
+                        </form>
+                    </td>
+                    <td th:unless="${task.completed}">
+                        <div th:text="${task.state}"></div>
+                    </td>
+
+                </tr>
+
+            </th:block>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>

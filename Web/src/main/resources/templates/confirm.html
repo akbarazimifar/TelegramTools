@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirmation</title>
+</head>
+<section id="loginform" class="outer-wrapper">
+    <div class="inner-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <h2 class="text-center">Confirmation</h2>
+                    <br>
+                    <form role="form" method="post" action="confirm">
+                        <div class="form-group">
+                            <label for="code">Authorization code</label>
+                            <input type="text" name="code" class="form-control" id="code"
+                                   placeholder="Code you received via Telegram">
+                        </div>
+
+                        <div class="btn-toolbar">
+                                <form>
+                                    <button type="submit" name="action" value="send" class="btn btn-default">Send code
+                                    </button>
+                                </form>
+                            <button type="submit" name="action" value="confirm" class="btn btn-default">Confirm</button>
+                        </div>
+
+                        <br>
+
+                        <div th:if="${error != null}">
+                            <div class="alert alert-danger" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                        <div th:if="${info != null}">
+                            <div class="alert alert-success" role="alert">
+                                <div th:text="${info}"></div>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
