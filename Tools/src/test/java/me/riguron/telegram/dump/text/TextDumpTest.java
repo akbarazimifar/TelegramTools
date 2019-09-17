@@ -8,7 +8,6 @@ import org.springframework.context.MessageSource;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -30,9 +29,6 @@ public class TextDumpTest {
 
 
         final Path path = Paths.get("src", "test", "resources");
-        if (Files.exists(path.getParent())) {
-            Files.createDirectories(path.getParent());
-        }
         File outputTarget = path.resolve("out.pdf").toFile();
 
 
