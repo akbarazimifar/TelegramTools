@@ -21,7 +21,7 @@ public abstract class EditableDocumentTest {
     public void doPrepare() throws IOException {
 
         final Path path = Paths.get("src", "test", "resources");
-        if (Files.exists(path.getParent())) {
+        if (!Files.exists(path.getParent())) {
             Files.createDirectories(path.getParent());
         }
 
