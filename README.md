@@ -1,5 +1,7 @@
 # TelegramTools
 
+[![Build Status](https://travis-ci.org/riguron/BotPlatform.svg?branch=master)](https://travis-ci.org/riguron/BotPlatform)
+
 A web service that allows for dumping contents of Telegram channels to the documents.
 
 # Technologies used
