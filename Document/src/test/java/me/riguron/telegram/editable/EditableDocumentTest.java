@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
@@ -16,9 +18,16 @@ public abstract class EditableDocumentTest {
     private File target;
 
     @Before
-    public void doPrepare() {
+    public void doPrepare() throws IOException {
 
-        this.target = Paths.get("src", "test", "resources").resolve("out." + extension()).toFile();
+        final Path path = Paths.get("src", "test", "resources");
+        if (Files.exists(path.getParent())) {
+            Files.createDirectories(path.getParent());
+        }
+
+
+
+        this.target = path.resolve("out." + extension()).toFile();
 
         try (EditableDocument editableDocument = createDocument(target)) {
             editableDocument.open();
@@ -46,8 +55,8 @@ public abstract class EditableDocumentTest {
 
     @After
     public void cleanUp() {
-        if (!this.target.delete()) {
-            throw new IllegalStateException("Failed to delete test output, please do it manually");
+        if (!target.delete()) {
+            throw new IllegalStateException("Failed to delete file");
         }
     }
 

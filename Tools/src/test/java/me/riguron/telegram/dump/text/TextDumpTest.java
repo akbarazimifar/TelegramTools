@@ -8,6 +8,9 @@ import org.springframework.context.MessageSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -24,7 +27,14 @@ public class TextDumpTest {
 
         MessageSource messageSource = mock(MessageSource.class);
         EditableDocument editableDocument = mock(EditableDocument.class);
-        File outputTarget = new File("src/test/resources/out.pdf");
+
+
+        final Path path = Paths.get("src", "test", "resources");
+        if (Files.exists(path.getParent())) {
+            Files.createDirectories(path.getParent());
+        }
+        File outputTarget = path.resolve("out.pdf").toFile();
+
 
         try {
             assertTrue(outputTarget.createNewFile());
