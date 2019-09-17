@@ -2,12 +2,14 @@ package me.nextgeneric.telegram;
 
 import me.nextgeneric.telegram.date.DateFormat;
 import me.nextgeneric.telegram.date.StandardDateFormat;
+import me.nextgeneric.telegram.dto.mapper.TaskMapper;
 import me.nextgeneric.telegram.security.RoleAssistant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.TypeExcludeFilter;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -24,8 +26,15 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @EnableAutoConfiguration
 @ComponentScan(excludeFilters = {
         @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-        @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)})
+        @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class),
+
+})
 public class WebSuiteTestConfig {
+
+    @Bean
+    public TaskMapper taskMapper(MessageSource messageSource) {
+        return new TaskMapper(messageSource);
+    }
 
     @Bean
     public AuthenticationSuccessHandler authSuccessHandler() {

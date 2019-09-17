@@ -43,8 +43,10 @@ public class ApplicationControllerTest {
     @MockBean
     private ChannelDumpExecutionManager executionManager;
 
+
     @Autowired
     private DateFormat dateFormat;
+
 
     @Autowired
     private MessageSource messageSource;
@@ -70,6 +72,7 @@ public class ApplicationControllerTest {
             when(state.getStateVariables()).thenReturn(Collections.emptyList());
             return state;
         });
+
 
         when(channelDumpService.getHistory(anyInt())).thenReturn(Collections.singletonList(taskProjection));
         when(executionManager.getActiveTasks(anyInt())).thenReturn(Collections.singletonList(channelDumpTask));
