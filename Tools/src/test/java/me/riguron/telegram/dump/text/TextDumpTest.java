@@ -3,8 +3,6 @@ package me.riguron.telegram.dump.text;
 import me.riguron.telegram.channel.ChannelMessage;
 import me.riguron.telegram.date.DateFormat;
 import me.riguron.telegram.editable.EditableDocument;
-import me.riguron.telegram.channel.ChannelMessage;
-import me.riguron.telegram.date.DateFormat;
 import org.junit.Test;
 import org.springframework.context.MessageSource;
 
@@ -42,7 +40,8 @@ public class TextDumpTest {
             verify(editableDocument).writeImage(eq(new byte[]{1, 2, 3}));
 
         } finally {
-            assertTrue(outputTarget.delete());
+            //noinspection ResultOfMethodCallIgnored
+            outputTarget.delete();
         }
     }
 }
