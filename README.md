@@ -1,6 +1,7 @@
 # TelegramTools
 
 [![Build Status](https://travis-ci.org/riguron/TelegramTools.svg?branch=master)](https://travis-ci.org/riguron/TelegramTools)
+[![codecov](https://codecov.io/gh/riguron/TelegramTools/branch/master/graph/badge.svg)](https://codecov.io/gh/riguron/TelegramTools)
 
 A web service that allows for dumping contents of Telegram channels to the documents.
 
