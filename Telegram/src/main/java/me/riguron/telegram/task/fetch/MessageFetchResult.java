@@ -1,6 +1,7 @@
 package me.riguron.telegram.task.fetch;
 
-import lombok.*;
+import lombok.NonNull;
+import lombok.Value;
 import me.riguron.telegram.channel.ChannelMessage;
 
 import java.util.List;

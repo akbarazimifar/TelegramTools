@@ -2,13 +2,12 @@ package me.riguron.telegram.entity.task;
 
 import lombok.*;
 import me.riguron.telegram.entity.UserProfile;
-import me.riguron.telegram.entity.UserProfile;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-import static lombok.AccessLevel.*;
+import static lombok.AccessLevel.NONE;
 
 @Immutable
 @Entity

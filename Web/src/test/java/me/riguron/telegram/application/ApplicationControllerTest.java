@@ -11,8 +11,6 @@ import me.riguron.telegram.dump.DumpOptions;
 import me.riguron.telegram.dump.execution.ChannelDumpExecutionManager;
 import me.riguron.telegram.dump.state.ChannelDumpState;
 import me.riguron.telegram.projection.TaskProjection;
-import me.riguron.telegram.date.DateFormat;
-import me.riguron.telegram.dump.state.ChannelDumpState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
